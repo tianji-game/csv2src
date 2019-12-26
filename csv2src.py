@@ -22,6 +22,7 @@ import xlrd
 import shutil
 import traceback
 import platform
+import codecs
 from datetime import *
 # from luacfg import *
 
@@ -217,9 +218,15 @@ def readCsv(fileName):
 	lines = fp.readlines()
 	fp.close()
 
+	isBOMUTF8 = lines[0][:3] == codecs.BOM_UTF8
+	if isBOMUTF8:
+		lines[0] = lines[0][3:]
 	ret = []
 	for x in lines:
-		ret.append(x.decode('gbk'))
+		if isBOMUTF8:
+			ret.append(x.decode('utf8'))
+		else:
+			ret.append(x.decode('gbk'))
 	return ret
 
 def readXls(fileName):

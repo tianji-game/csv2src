@@ -12,7 +12,7 @@ game config convert to source code
 
 ### Feature
 
-- support csv, xls, xlsx
+- support csv,csv(utf8 BOM), xls, xlsx
 
 - support convert to lua, python
 
